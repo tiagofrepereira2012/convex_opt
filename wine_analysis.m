@@ -1,6 +1,24 @@
 %%%%%%
-% iris_analysis.m
+% wine_analysis.m
 % 
+% Analysis using Wine dataset (https://archive.ics.uci.edu/ml/datasets/Wine)
+%
+% The Wine dataset has 150 data points split in 3 classes.
+%
+% 1) Alcohol 
+% 2) Malic acid 
+% 3) Ash 
+% 4) Alcalinity of ash 
+% 5) Magnesium 
+% 6) Total phenols 
+% 7) Flavanoids 
+% 8) Nonflavanoid phenols 
+% 9) Proanthocyanins 
+% 10)Color intensity 
+% 11)Hue 
+% 12)OD280/OD315 of diluted wines 
+% 13)Proline 
+%
 % @author Tiago de Freitas Pereira <tiago.pereira@idiap.ch>
 % @date Thu  2 Jun 2016
 %

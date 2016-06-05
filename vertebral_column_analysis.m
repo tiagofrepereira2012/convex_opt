@@ -1,6 +1,12 @@
 %%%%%%
-% iris_analysis.m
+% vertebral_column_analysis.m
 % 
+% Analysis using Vertebral Column dataset (https://archive.ics.uci.edu/ml/datasets/Vertebral+Column)
+%
+% The Iris dataset has 310 data points split in 2 classes and they are the following:
+
+%
+%
 % @author Tiago de Freitas Pereira <tiago.pereira@idiap.ch>
 % @date Thu  2 Jun 2016
 %

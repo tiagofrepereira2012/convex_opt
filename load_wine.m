@@ -3,8 +3,6 @@ function [ data_train, labels_train, data_test, labels_test ] = load_wine(filena
 percentage_train = 0.75;
 fileID = fopen(filename);
 
-%possible_labels = {'Iris-virginica';'Iris-setosa';'Iris-versicolor'};
-%[n,d] = size(possible_labels);
 n = 3;
 
                

@@ -1,6 +1,19 @@
 %%%%%%
 % iris_analysis.m
 % 
+% Analysis using Iris dataset (https://archive.ics.uci.edu/ml/datasets/Iris)
+%
+% The Iris dataset has 150 data points split in 3 classes and they are the following:
+%      -- Iris Setosa
+%      -- Iris Versicolour
+%      -- Iris Virginica
+%
+% Each data point has 4 numeric attibutes:
+%   1. sepal length in cm
+%   2. sepal width in cm
+%   3. petal length in cm
+%   4. petal width in cm
+%
 % @author Tiago de Freitas Pereira <tiago.pereira@idiap.ch>
 % @date Thu  2 Jun 2016
 %
