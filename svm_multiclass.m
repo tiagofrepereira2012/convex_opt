@@ -1,6 +1,17 @@
 %%%%%%
 % svm_multiclass.m
 % 
+%
+% Implements the multiclass SVM in the same fashion as in Bishop's book, chapter 7.1.3.
+%
+% For a classification task with K classes, K separate binary SVMs are
+% contructed in which the kth model yk(x) is trained using the data from 
+% class Ck as the positive examples and the data from the remaining K ? 1 
+% classes as the negative examples (one-versus-the-rest approach).
+%
+% The final decision is made by taking:
+% y(x) = max yk (x).
+%
 % @author Tiago de Freitas Pereira <tiago.pereira@idiap.ch>
 % @date Thu  2 Jun 2016
 %
