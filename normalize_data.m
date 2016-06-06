@@ -1,7 +1,7 @@
 %%%%
 % mean, variance data normalization
 %%%%
-function [ data ] = normalize_data(data)
+function [ data,  mean_data, std_data] = normalize_data(data)
 
 mean_data = mean(data);
 std_data  = std(data);

@@ -19,6 +19,13 @@ clear;
 
 [ data_train, labels_train, data_test, labels_test ] = load_toy_data();
 
+[data_train, mean_data, std_data] = normalize_data(data_train);
+data_test = bsxfun(@minus, data_test, mean_data); %normalizing test set
+data_test = bsxfun(@rdivide, data_test, std_data);
+%data_test = data(i,:) = (data(i,:)-mean_data)./std_data;
+
+
+
 C      = [0.0001; 0.001;0.01;0.1;1;10;100; 1000];
 C_plot = [0.001;0.01;0.1;1;10;100];
 [n_C,d] = size(C);

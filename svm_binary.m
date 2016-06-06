@@ -11,9 +11,6 @@ function [accuracy_train, accuracy_test, support_vectors_ratio] = svm_binary(dat
     [n_train,d] = size(data_train);
     [n_test,d] = size(data_test);
 
-    data_train = normalize_data(data_train);
-    data_test = normalize_data(data_test);
-
     [w,b, lambda] = svm_train(data_train, labels_train, soft, C);
     y_train = svm_scoring(w,b,data_train); %scoring
     y_test  = svm_scoring(w,b,data_test); %scoring

@@ -26,8 +26,6 @@ function [accuracy_train, accuracy_test, support_vectors_ratio] = svm_multiclass
     Y_train = [];
     Y_test = [];
     LAMBDA = [];
-    data_train = normalize_data(data_train);
-    data_test = normalize_data(data_test);
     %Creating svms for each class
     for i=1:n_classes
         svm_labels = convert_svm_labels(labels_train, i);
