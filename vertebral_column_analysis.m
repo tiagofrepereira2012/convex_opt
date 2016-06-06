@@ -32,7 +32,8 @@ end
 
 figure;
 hold on;
-title('Accuracy,support vectors ratio vs C');
+title('(c)');
+%title('Accuracy and Support Vectors Ratio vs C');
 
 xlabel('C') % x-axis label
 ylabel('Accuracy') % y-axis label

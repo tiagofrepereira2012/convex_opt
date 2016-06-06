@@ -26,7 +26,7 @@ data_test = bsxfun(@rdivide, data_test, std_data);
 
 
 
-C      = [0.0001; 0.001;0.01;0.1;1;10;100; 1000];
+C      = [0.0001; 0.001;0.01;0.1;1;10;100; 1000; 10000];
 C_plot = [0.001;0.01;0.1;1;10;100];
 [n_C,d] = size(C);
 [n_C_plot,d] = size(C_plot);
@@ -45,9 +45,9 @@ for i=1:n_C_plot
     plot(data_train(pos,1), data_train(pos,2), 'bo', 'MarkerFaceColor', 'b'); hold on;
     plot(data_train(neg,1), data_train(neg,2), 'ro', 'MarkerFaceColor', 'r');
 
-    plot(data_test(pos_test,1), data_test(pos_test,2), 'b*', 'MarkerFaceColor', 'b');
-    plot(data_test(neg_test,1), data_test(neg_test,2), 'r*', 'MarkerFaceColor', 'r');
-    title(strcat('SVM C=',num2str(C_plot(i))));
+    %plot(data_test(pos_test,1), data_test(pos_test,2), 'b*', 'MarkerFaceColor', 'b');
+    %plot(data_test(neg_test,1), data_test(neg_test,2), 'r*', 'MarkerFaceColor', 'r');
+    title(strcat('C=',num2str(C_plot(i))));
 
     %training SVM
     [w,b,y] = svm_train(data_train, labels_train, true, C_plot(i));
@@ -89,7 +89,7 @@ end
 
 figure;
 hold on;
-title('Accuracy,support vectors ratio vs C');
+title('Accuracy and Support Vectors Ratio vs C');
 
 xlabel('C') % x-axis label
 ylabel('Accuracy') % y-axis label
