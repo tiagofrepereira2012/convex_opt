@@ -1,0 +1,73 @@
+	%\documentclass[10pt]{article}
+\documentclass[a4paper,10pt]{article}
+%\documentclass[runningheads]{llncs}
+
+%\usepackage[dvips,body={160mm,240mm},top=20mm,left=20mm]{geometry}
+%\usepackage{amsfonts}
+%\usepackage{theorem}
+\usepackage{epsfig,subfigure,natbib,amsbsy,t1enc,multicol,pifont, psfrag}
+%\usepackage{amssymb,array,delarray,verbatim,alltt,epsfig,float,theorem}
+%\usepackage{graphicx,xspace, capt-of}
+
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{subfig}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage{natbib}
+\usepackage[relative]{overpic}
+
+\usepackage{verbatim} %%%% Unlock comments
+
+\usepackage[]{algorithm2e}
+
+\oddsidemargin -1cm
+\evensidemargin -1cm
+\textwidth 18cm
+\headheight 1cm
+\topmargin 0cm
+\textheight 21cm
+
+\linespread{1.2}
+%\linespread{1.3}
+
+\graphicspath{{images/}}
+\newcommand{\argmax}{\operatornamewithlimits{argmax}}
+
+\markboth{~}{~}
+\newcommand{\subsubsubsection}[1]{\noindent\rule[-1em]{0mm}{2.5em}{\underline{\bf #1}}}
+
+\begin{document}
+
+\include{cover}
+
+\tableofcontents
+\thispagestyle{empty} %Tirando o numero da primeira p‡gina
+\addtocounter{page}{-1}
+\newpage
+
+
+%
+\section{Introduction}
+
+\input intro
+
+\section{Complexity of SVM models}
+
+\input complexity
+
+
+\section{Experiments}
+
+\input experiments
+
+
+\section{Conclusion}
+
+\input conclusion
+
+\bibliographystyle{plain}
+\bibliography{biblio}
+\end{document}
