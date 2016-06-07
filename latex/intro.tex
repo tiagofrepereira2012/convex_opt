@@ -22,14 +22,15 @@ The hyperplane is defined by the equation: $w^Tx+b$, such that:
 This is equivalent to the condition: $ t_i(w^Tx_i+b) \geq 1$.
 Given that the margin is equal to $\frac{1}{\|w\|}$, the optimization problem is:
 % $w^Tx_i+b \leq \gamma$ if $t_i=+1$ and  $w^Tx_i+b \geq -\gamma$ if $t_i=-1$. Since we can always normalize $w$ and $b$ by $\gamma$, the  previous conditions can be written as $w^Tx_i+b \leq 1$ if $t_i=+1$ and  $w^Tx_i+b \geq -1$ if $t_i=-1$. In this case, the margin is $\frac{1}{\|w\|}$. 
-\begin{equation*}
+\begin{equation}
 \begin{aligned}
 & \underset{w}{\text{minimize}}
 & & \frac{1}{2}\|w\|^2 \\
 & \text{subject to}
 & & t_i(w^Tx_i+b) \geq 1, \; i = 1, \ldots, m.
+\label{eq:svm_hard}
 \end{aligned}
-\end{equation*}
+\end{equation}
 This is a quadratic programming problem, which can be written with cvx as:
 \begin{verbatim}
 cvx_begin
@@ -40,19 +41,23 @@ cvx_begin
   	    y: labels.*(data*w+b) > 1; 
 cvx_end
 \end{verbatim}
-The Lagrangian is: \[ \mathcal{L}(w,b,\alpha)= \frac{1}{2} \|w\|^2+\sum\limits_{i=1}^m \alpha_i (1-t_i(w^Tx_i+b))\]
-According to the KKT dual complementarity condition, $\alpha_i = 0$ when $t_i(w^Tx_i+b) > 1$. This implies that  $\alpha_i \neq 0$ only for the points lying on the margin. These points are called Support Vectors, as they are the only ones that will have an impact on the optimal solution.\\
+The Lagrangian is defined as the following: 
+\begin{equation}
+  \mathcal{L}(w,b,\alpha)= \frac{1}{2} \|w\|^2+\sum\limits_{i=1}^m \alpha_i (1-t_i(w^Tx_i+b))
+\end{equation}
+
+According to the KKT dual complementarity slackeness condition, $\alpha_i = 0$ when $t_i(w^Tx_i+b) > 1$. This implies that  $\alpha_i \neq 0$ only for the points lying on the margin. These points are called Support Vectors, as they are the only ones that will have an impact on the optimal solution.\\
 To derive the dual problem we set:
 %\[g(\alpha)=\underset{w,b}{\inf}\mathcal{L}(w,b,\alpha)\].
-\begin{equation*}
+\begin{equation}
 \begin{aligned}
  \nabla _w \mathcal{L}(w,b,\alpha)&=0 \Leftrightarrow w=\sum\limits_{i=1}^m \alpha_i t_i x_i\\
 \frac{ \partial \mathcal{L}(w,b,\alpha)}{\partial b}&=0 \Leftrightarrow  \sum\limits_{i=1}^m \alpha_i t_i=0
 \end{aligned}
-\end{equation*}
+\end{equation}
 
 Thus, the dual problem is:
-\begin{equation*}
+\begin{equation}
 \begin{aligned}
 & \underset{w}{\text{maximize}}
 & & \sum\limits_{i=1}^m \alpha_i - \frac{1}{2} \sum\limits_{i=1}^m \sum\limits_{j=1}^m \alpha_i \alpha_j t_i t_j x_i^T x_j \\
@@ -60,19 +65,20 @@ Thus, the dual problem is:
 & & \alpha_i \geq 0, \; i = 1, \ldots, m \\
 & & & \sum\limits_{i=1}^m \alpha_i t_i = 0.
 \end{aligned}
-\end{equation*}
+\end{equation}
 
 \subsection{Constraints relaxation}
 There are two obvious issues with this approach. The first one is that the optimization problem is infeasible when the data is not linearly separable, the second one is that the optimal solution is very sensitive to outliers. To palliate to these issues, we need to relax the margin constraint. To do so, slack variables $\xi_i$, $i=1,...,m$ are introduced and the optimization problem becomes:
-\begin{equation*}
+\begin{equation}
 \begin{aligned}
 & \underset{w}{\text{minimize}}
 & & \frac{1}{2}\|w\|^2 + C\sum\limits_{i=1}^m \xi_i\\
 & \text{subject to}
 & & t_i(w^Tx_i+b) \geq 1-\xi_i, \; i = 1, \ldots, m\\
 & & & \xi_i \geq 0, \; i = 1, \ldots, m.
+\label{eq:svm_soft}
 \end{aligned}
-\end{equation*}
+\end{equation}
 
 In this scenario, points are permitted to have a margin that is less than 1. If a point has a margin of $1 - \xi_i$, then the cost function will be increased by $C\xi_i$. 
 \\The corresponding cvx code is:
@@ -87,7 +93,7 @@ cvx_begin
   cvx_end
 \end{verbatim}
 With this relaxed margin constraint, the dual problem becomes:
-\begin{equation*}
+\begin{equation}
 \begin{aligned}
 & \underset{w}{\text{maximize}}
 & & \sum\limits_{i=1}^m \alpha_i - \frac{1}{2} \sum\limits_{i=1}^m \sum\limits_{j=1}^m \alpha_i \alpha_j t_i t_j x_i^T x_j \\
@@ -95,7 +101,7 @@ With this relaxed margin constraint, the dual problem becomes:
 & & 0 \leq \alpha_i \leq C, \; i = 1, \ldots, m \\
 & & & \sum\limits_{i=1}^m \alpha_i t_i = 0.
 \end{aligned}
-\end{equation*}
+\end{equation}
 
 \subsection{Multiclass}
 Until now, we assumed that the data belonged to two classes with labels $t_i=\pm1$. To be able to use this method with $K$ classes, one way is to transform the multiclass problem into  $K$ binary classification problems by using the one-versus-all strategy. 
