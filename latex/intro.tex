@@ -1,6 +1,6 @@
 \label{sec:intro}
 
-Support Vector Machine (SVM) is a non-parametric classification algorithm widely used when solving pattern recognition tasks. The goal of this report is to explain SVM as a convex optimization problem and analyze the complexity of the model as a function of a regularization parameter.
+Support Vector Machine (SVM)~\cite{cortes1995support} is a non-parametric classification algorithm widely used when solving pattern recognition tasks. The goal of this report is to explain SVM as a convex optimization problem and analyze the complexity of the model as a function of a regularization parameter.
 \subsection{Support Vector Machine with hard constraints}
 We are given a training dataset $\{x_i, t_i\}$, $i=1\ldots m$, where $x_i \in \mathbb{R}^n$ is the point coordinates and  $t_i \in \{-1,+1 \}$ is the associated label. For now, we assume that the data is linearly separable, i.e., there exists at least one hyperplane that can separates the two classes. The goal is to find the hyperplane that maximizes the margin, which is the smallest distance from each class to the hyperplane.
 
