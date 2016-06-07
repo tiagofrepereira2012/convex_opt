@@ -59,6 +59,8 @@ for i=1:n_C_plot
             viscircles([data_train(j,1),data_train(j,2)],0.1, 'LineStyle','--')
         end
     end
+    xlim([-4 4]);
+    ylim([-4 4]);
 
     %Plotting decision boundary
     % Threshold 0 and support vectors +1 and -1
@@ -95,14 +97,15 @@ xlabel('C') % x-axis label
 ylabel('Accuracy') % y-axis label
 
 semilogx(C,accuracy_train,'MarkerFaceColor', 'b','LineWidth',2);
-semilogx(C,accuracy_test,'MarkerFaceColor', 'g','LineWidth',2);
+%semilogx(C,accuracy_test,'MarkerFaceColor', 'g','LineWidth',2);
 semilogx(C, support_vectors_ratio, 'LineStyle','--','LineWidth',2);
 
 semilogx(C,accuracy_train,'o','LineWidth',2);
-semilogx(C,accuracy_test,'o','LineWidth',2);
+%semilogx(C,accuracy_test,'o','LineWidth',2);
 semilogx(C, support_vectors_ratio,'o','LineWidth',2);
 
-legend('Accuracy Train set', 'Accuracy Test set', 'Support Vectors ratio');
+%legend('Accuracy Train set', 'Accuracy Test set', 'Support Vectors ratio');
+legend('Accuracy Train set', 'Support Vectors ratio');
 grid on;
 set(gca,'xscale','log');
 hold off;
