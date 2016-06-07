@@ -19,8 +19,9 @@ The hyperplane is defined by the equation: $w^Tx+b$, such that:
   \end{cases}
 \]
 
-This is equivalent to the condition: $ t_i(w^Tx_i+b) \geq 1$.
-Given that the margin is equal to $\frac{1}{\|w\|}$, the optimization problem is:
+This can be merged into one condition: $ t_i(w^Tx_i+b) \geq 1$.
+
+We want to maximize the margin, which is equal to $\frac{1}{\|w\|}$. This is equivalent to minimizing $\|w\|^2$, which is a more convenient form as it is a quadratic objective function. The optimization problem is the following:
 % $w^Tx_i+b \leq \gamma$ if $t_i=+1$ and  $w^Tx_i+b \geq -\gamma$ if $t_i=-1$. Since we can always normalize $w$ and $b$ by $\gamma$, the  previous conditions can be written as $w^Tx_i+b \leq 1$ if $t_i=+1$ and  $w^Tx_i+b \geq -1$ if $t_i=-1$. In this case, the margin is $\frac{1}{\|w\|}$. 
 \begin{equation}
 \begin{aligned}
@@ -31,14 +32,15 @@ Given that the margin is equal to $\frac{1}{\|w\|}$, the optimization problem is
 \label{eq:svm_hard}
 \end{aligned}
 \end{equation}
+
 This is a quadratic programming problem, which can be written with cvx as:
 \begin{verbatim}
 cvx_begin
     variables w(dim) b; 
-    dual variable y;
+    dual variable alpha;
     minimize(0.5*w'*w);
     subject to 
-  	    y: labels.*(data*w+b) > 1; 
+  	    y: t.*(x*w+b) > 1; 
 cvx_end
 \end{verbatim}
 The Lagrangian is defined as the following: 
@@ -85,10 +87,10 @@ In this scenario, points are permitted to have a margin that is less than 1. If 
 \begin{verbatim}
 cvx_begin
     variables w(dim) b slack(n);
-    dual variable y;
+    dual variable alpha;
     minimize(0.5*w'*w + C*sum(slack));
     subject to 
-  	    y: labels.*(data*w+b) > 1 - slack; 
+  	    y: t.*(x*w+b) > 1 - slack; 
         slack > 0;
   cvx_end
 \end{verbatim}
@@ -106,4 +108,5 @@ With this relaxed margin constraint, the dual problem becomes:
 \subsection{Multiclass}
 Until now, we assumed that the data belonged to two classes with labels $t_i=\pm1$. To be able to use this method with $K$ classes, one way is to transform the multiclass problem into  $K$ binary classification problems by using the one-versus-all strategy. 
 
-In each binary classification problem, we assume that the points belonging to a given class $k$, $k=1\ldots K$, is labelled as $t_i=1$ and all the other points will be labelled as $t_i=-1$. Once all the binary classifiers have been trained, we need to decide which one to choose. To do so, we pick the one with the highest value $w_k^Tx_i+b_k$, $k=1\ldots K$, $i=1\ldots m$ . 
+In each binary classification problem, we assume that the points belonging to a given class $k$, with $k=1\ldots K$, is labelled as $t_i=1$ and all the other points will be labelled as $t_i=-1$. Once all the binary classifiers have been trained, we need to decide which class to choose for a given point $x_i$, $i=1\ldots m$. To do so, we pick the class $k$ such that:
+\[k = \arg\max_{1 \leq k \leq K} w_k^Tx_i+b_k.\] 
