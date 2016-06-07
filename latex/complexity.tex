@@ -23,7 +23,7 @@ For practical purposes, in our Matlab scripts, we are considering as support vec
 Let's define $r$ as the ratio between the number of support vectors and the number of data points used to train the SVM model.
 This value can gives us an intuition about the complexity of the model.
 When $r$ is equal to 1, it means that the model needs the whole training data to define a decision boundary.
-This makes our model more complex in the sense that it needs as much active constraints as data.
+This makes our model more complex in the sense that it needs as much active constraints as data (Figure \ref{fig:svm} with $C=0.001$).
 
 The task of picking a value for $C$ is to select the simplest model that gives the highest accuracy.
 Figure \ref{fig:toy} shows a plot with the accuracies (solid line) and the value of $r$ (dashed line) for each value of $C$ in our toy example.
@@ -31,7 +31,7 @@ Figure \ref{fig:toy} shows a plot with the accuracies (solid line) and the value
 \begin{figure}[!htb]
 \begin{center}
 \includegraphics [width=10.5cm] {./graphics/toy_plot.png}
-\caption{Accuracy and Support Vector Ratio $r$ vs $C$} \label{fig:toy}
+\caption{Accuracy and Support Vector Ratio $r$ vs $C$. The solid line represents the accuracy, the dashed line represents the ratio $r$.} \label{fig:toy}
 \end{center}
 \end{figure}
 
