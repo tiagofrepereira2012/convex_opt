@@ -1,7 +1,7 @@
 \label{sec:complexity}
 
 As discussed in Section \ref{sec:intro} the goal of the constraints relaxation in SVMs is to maximize the margins while softly penalizes data points that lies in the wrong side of the margins borders.
-In \ref{eq:svm_soft} this penalty adds to the cost function $C\xi{i}$.
+In Equation \ref{eq:svm_soft} this penalty adds to the cost function $C\xi{i}$.
 The value of $C$ can be interpreted as a regularization parameter.
 Low values for $C$ "allows" more data points lying between the margins, making them "softer".
 On the other hand, higher values of $C$ makes the margins "harder".
@@ -11,15 +11,15 @@ In this example made with toy data it is possible to observe the margins getting
 \begin{figure}[!htb]
 \begin{center}
 \includegraphics [width=12.5cm] {./graphics/SVM_PLOT.png}
-\caption{Linear SVM under diferent values of $C$. The solid lines are the optimal decision boundaries. The dashed lines and dashed circles ($\alpha_{i}$) are the support vectors.} \label{fig:svm}
+\caption{Linear SVM used to find a separation between the red dots and the blue dots under diferent values of $C$. The solid lines are the optimal decision boundaries. The dashed lines and the stars are the support vectors ($\alpha_{i} > 0$).} \label{fig:svm}
 \end{center}
 \end{figure}
 
 %The number of Lagrange variables greater than $0$ ($>0$ not $\geq 0$) will gives us the number of support vectors ().
 
-Since the strong duality holds for this QP problem, we can do some sensitive interpretations with the Lagrange variables $\alpha_{i}$.
+Since the strong duality holds for this QP problem, we can do some sensitive interpretations with the Lagrange variables $\alpha_{i}$ \cite{boyd2004convex}.
 As aforementioned are considered support vectors all dual variables that are greater than 0 ($\alpha_{i} > 0$).
-For practical purposes, in our matlab scripts, we are considering as support vectors all dual variables greater than $0.0000001$ ($ \alpha_{i} > 0.0000001$).
+For practical purposes, in our Matlab scripts, we are considering as support vectors all dual variables greater than $0.0000001$ ($ \alpha_{i} > 0.0000001$).
 Let's define $r$ as the ratio between the number of support vectors and the number of data to train the SVM model.
 This value can gives us an intuition about the complexity of the model.
 With $r$ equals to 1, means that the model needs the whole training data to define a decision boundary.

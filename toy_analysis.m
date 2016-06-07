@@ -42,8 +42,8 @@ neg_test = find(labels_test == -1);
 
 for i=1:n_C_plot
     subplot(3,2,i);
-    plot(data_train(pos,1), data_train(pos,2), 'bo', 'MarkerFaceColor', 'b'); hold on;
-    plot(data_train(neg,1), data_train(neg,2), 'ro', 'MarkerFaceColor', 'r');
+    plot(data_train(pos,1), data_train(pos,2), 'b.', 'MarkerFaceColor', 'b',  'MarkerSize',20); hold on;
+    plot(data_train(neg,1), data_train(neg,2), 'r.', 'MarkerFaceColor', 'r',  'MarkerSize',20);
 
     %plot(data_test(pos_test,1), data_test(pos_test,2), 'b*', 'MarkerFaceColor', 'b');
     %plot(data_test(neg_test,1), data_test(neg_test,2), 'r*', 'MarkerFaceColor', 'r');
@@ -56,7 +56,12 @@ for i=1:n_C_plot
     epsilon = 0.000001;
     for j=1:n
         if(y(j) > epsilon)
-            viscircles([data_train(j,1),data_train(j,2)],0.1, 'LineStyle','--')
+            %viscircles([data_train(j,1),data_train(j,2)],0.1, 'LineStyle','--')
+            if(labels_train(j) == 1)
+              plot(data_train(j,1), data_train(j,2), 'b*', 'MarkerFaceColor', 'b',  'MarkerSize',7); hold on;
+            else
+              plot(data_train(j,1), data_train(j,2), 'r*', 'MarkerFaceColor', 'r',  'MarkerSize',7);hold on;
+            end
         end
     end
     xlim([-4 4]);

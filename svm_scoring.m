@@ -5,8 +5,8 @@
 % @date Thu  2 Jun 2016
 %
 %%%%%%
-function y = svm_scoring(w,b,data)
-   y = data*w + b;
+function y = svm_scoring(w,b,x)
+   y = x*w + b;
 end
     
 

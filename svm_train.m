@@ -15,19 +15,19 @@
 %   soft: It defines the implementation t`rue `is soft margins, `false` is
 %   hard margins
 %%%%%%
-function [w,b,y] = svm_train(data, labels, soft, C)
+function [w,b,alpha] = svm_train(x, t, soft, C)
 
-[n,dim] = size(data);
+[n,dim] = size(x);
 
 if(soft)
   %Training the SVM with soft margins
   cvx_begin
       variables w(dim) b slack(n); %3 VARIABLES: The coordenates of the margins, 
       %the bias and the slack variables correspondent to each 
-      dual variable y; %The dual variables will give the support vectors
+      dual variable alpha; %The dual variables will give the support vectors
       minimize(0.5*w'*w + C*sum(slack));
       subject to 
-  	    y: labels.*(data*w+b) > 1 - slack; %Constraint
+  	    alpha: t.*(x*w+b) > 1 - slack; %Constraint
         slack > 0;
   cvx_end
 else
@@ -35,10 +35,10 @@ else
   cvx_begin
       variables w(dim) b; %2 VARIABLES: The coordenates of the margins AND 
       %the bias
-      dual variable y; %The dual variables will give the support vectors
+      dual variable alpha; %The dual variables will give the support vectors
       minimize(0.5*w'*w);
       subject to 
-  	    y: labels.*(data*w+b) > 1; %Constraint        
+  	    alpha: t.*(x*w+b) > 1; %Constraint        
   cvx_end
     
 end
