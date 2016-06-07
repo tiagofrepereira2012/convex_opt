@@ -2,4 +2,4 @@
 Convex Optimization Project
 ===========================
 
-Just run the file project.m
+The executable files for the project are `toy_analysis.m`, `iris_analysis.m`, `wine_analysis.m` and `vertebral_column_analysis.m`
